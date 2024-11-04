@@ -1,0 +1,128 @@
+1) Blackhorse
+
+-Devlopment backend:
+URL:      https://dev.handle-t.com/
+Database: mongodb+srv://Black_Horse:BlackHorse@blackhorse.ji3jgx3.mongodb.net/BlackHorses?retryWrites=true&w=majority
+
+-Production backend:
+URL:      https://backend.handle-t.com/
+Database: mongodb://blackhorse:GyedbzL8n87ian6w@62.171.185.66:27017/?authSource=blackhorse
+
+-AdminPanal:
+URL:      https://blackhorse.handle-t.com/
+
+-Postman:
+URL:      https://documenter.getpostman.com/view/36491777/2sAXjJ6DG9
+
+-ServerData:
+ipserver: 62.171.185.66
+password: uDq4eVw8k2E1
+
+-AaPanel:
+URL:      https://62.171.185.66:31575/643fff73
+username: aizhqbza
+password: 0fa61f40
+
+-Projects Path on Server:
+devolpment path: /www/wwwroot/dev.handle-t.com/HandleT-BlackHorse
+production path: /www/wwwroot/backend.handle-t.com/HandleT-BlackHorse
+adminpanel path: /www/wwwroot/handle-t.com
+
+-OTP_Service:
+url:      https://app.smseg.com
+username: Ss15883
+password: ssL559120
+-----------------------------------------------------------------------------------------
+
+			*****************************
+			* ServerIP: 188.40.194.154  *
+			* UserName: root            *
+			* Password: p95MDtHfxGn086K *
+			*****************************
+2) Hewaity (هوايتي العصافير)
+
+-AdminPanal:
+URL:            http://188.40.194.154:7000
+path in server: /var/html/hewaity-3safer/admin-panel/
+
+-Backend:
+URL:      	http://188.40.194.154:4000
+path in server: /var/html/hewaity-3safer/HandleT-BlackHorse/
+
+-Database:
+mongodb+srv://azaki:123@cluster0.56xkote.mongodb.net/?retryWrites=true&w=majority
+
+
+
+
+3) Inventory-Takka  (المراتب)
+
+-AdminPanal:
+URL:            http://188.40.194.154:9000
+path in server: /var/html/inventory-takka/adminpanel/
+
+-Backend:
+URL:      	http://188.40.194.154:3000
+path in server: /var/html/inventory-takka/Inventory-Takka/
+
+-Database:
+mongodb+srv://azaki:123@cluster0.56xkote.mongodb.net/inventory2?retryWrites=true&w=majority
+
+-Postman:
+https://documenter.getpostman.com/view/36491777/2sAXxTdXBR
+
+
+
+
+4) Inventory-saudi    (اللي فيها بيع بالسالب)
+
+-AdminPanal:
+URL:            http://188.40.194.154:2000
+path in server: /var/html/inventory-saudi-production/inventory-panel/
+
+-Backend:
+URL:      	http://188.40.194.154:5050
+path in server: /var/html/inventory-saudi-production/Inventory-Saudi/
+
+-Database:
+mongodb+srv://azaki:123@cluster0.56xkote.mongodb.net/saudi-production?retryWrites=true&w=majority
+
+-Postman:
+https://documenter.getpostman.com/view/36491777/2sAXxTdXBR
+
+
+
+
+5) Inventory    (نسخة علشان العملاء تعمل عليه تيست)
+
+-AdminPanal:
+URL:            http://188.40.194.154:8000
+path in server: /var/html/inventory/inventory-panel/
+
+-Backend:
+URL:      	http://188.40.194.154:5000
+path in server: /var/html/inventory/inventory/
+
+-Database:
+mongodb+srv://azaki:123@cluster0.56xkote.mongodb.net/inventory?retryWrites=true&w=majority
+
+-Postman:
+https://documenter.getpostman.com/view/36491777/2sAXxTdXBR
+
+-----------------------------------------------------------------------------------------------------------------------
+
+6) Inventory    (نسخة علشان العملاء تعمل عليه تيست)
+
+-AdminPanal:
+URL:            http://188.40.194.154:5004
+path in server: /var/html/inventory-saudi/inventory-panel/
+
+-Backend:
+URL:      	http://188.40.194.154:5001
+path in server: /var/html/inventory-saudi/Inventory-Saudi/
+
+-Database:
+mongodb+srv://Black_Horse:BlackHorse@blackhorse.ji3jgx3.mongodb.net/inventory-1
+
+-Postman:
+https://documenter.getpostman.com/view/36491777/2sAXxTdXBR

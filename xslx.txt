@@ -1,0 +1,91 @@
+MONGODB_URL_DEVZAKI=mongodb+srv://azaki:123@cluster0.56xkote.mongodb.net/inventory3-test?retryWrites=true&w=majority
+
+npm install xlsx
+
+// import xlsx from 'xlsx';
+
+import Product from './models/productSchema.js';
+import SubCategory from './models/subCategorySchema.js';
+import SubSubCategory from './models/subSubCategorySchema.js';
+import Category from './models/categorySchema.js';
+import Unit from './models/unitSchema.js';
+import SubUnit from './models/subUnitSchema.js';
+
+
+app.get('/', async (req, res) => {
+  res.send('<center><h1>Welcome to BlackHorse Company</h1></center>');
+
+  // try {
+  //   const workbook = xlsx.readFile('./reminder_products.xlsx');
+  //   const sheetName = workbook.SheetNames[0];
+  //   const worksheet = workbook.Sheets[sheetName];
+  //   const products = xlsx.utils.sheet_to_json(worksheet);
+
+  //   for (const product of products) {
+  //     let existingCategory = await Category.findOne({ name: product['القسم'].trim() });
+  //     if (!existingCategory) {
+  //       existingCategory = new Category({ name: product['القسم'].trim(), image: 'image' });
+  //       await existingCategory.save();
+  //     }
+
+  //     let existingSubCategory = await SubCategory.findOne({ name: product['التصنيف الفرعي'].trim(), category: existingCategory._id });
+  //     if (!existingSubCategory) {
+  //       existingSubCategory = new SubCategory({ name: product['التصنيف الفرعي'].trim(), category: existingCategory._id });
+  //       await existingSubCategory.save();
+  //     }
+
+  //     let existingSubSubCategory = await SubSubCategory.findOne({ name: product['التصنيف الفرعي_1'].trim(), subCategory: existingSubCategory._id });
+  //     if (!existingSubSubCategory) {
+  //       existingSubSubCategory = new SubSubCategory({ name: product['التصنيف الفرعي_1'].trim(), subCategory: existingSubCategory._id });
+  //       await existingSubSubCategory.save();
+  //     }
+
+  //     let existingUnit = await Unit.findOne({ name: product['الوحدة الاساسية'].trim() });
+  //     if (!existingUnit) {
+  //       existingUnit = new Unit({ name: product['الوحدة الاساسية'].trim(), maxNumber: 1 });
+  //       await existingUnit.save();
+  //     }
+
+  //     let existingSubUnit = await SubUnit.findOne({ name: product['الوحدة الفرعية'].trim() });
+  //     if (!existingSubUnit) {
+  //       existingSubUnit = new SubUnit({ name: product['الوحدة الفرعية'].trim() });
+  //       await existingSubUnit.save();
+  //     }
+
+  //     const newProduct = new Product({
+  //       barcode: formatBarcode(product['الباركود']),
+  //       title: product['اسم المنتج'], // .trim()
+  //       weight: product['وزن المنتج'],
+  //       desc: '-',
+  //       category: existingCategory._id,
+  //       subCategory: existingSubCategory._id,
+  //       subSubCategory: existingSubSubCategory._id,
+  //       units: [existingUnit._id],
+  //       subUnit: existingSubUnit._id
+  //     });
+
+  //     await newProduct.save();
+  //     console.log(`Product with barcode ${product['الباركود']} inserted`);
+  //   }
+
+  //   const ExistingProducts = await Product.find({});
+  //   const transformedProducts = await Promise.all(
+  //     ExistingProducts.map(async (product) => await transformationProduct(product))
+  //   );
+  //   res.status(200).json({
+  //     status: "success",
+  //     data: transformedProducts,
+  //   });
+  // } catch (error) {
+  //   res.status(500).json({ error: error.message });
+  // }
+});
+
+
+function formatBarcode(barcode) {
+  barcode = String(barcode);
+  while (barcode.length < 13) {
+    barcode = '0' + barcode;
+  }
+  return barcode;
+}
