@@ -5,6 +5,8 @@ import Offer from "../models/offerSchema.js";
 import Order from "../models/orderSchema.js";
 import SupplierProduct from "../models/supplierProductSchema.js";
 import { transformationOrderProduct, transformationProduct, transformationSupplierProduct } from "../format/transformationObject.js";
+import PurchaseItem from "../models/store.models/purchaseItemSchema.js";
+import { transformationInventoryProduct } from "../format/transformationObject.js";
 
 export const getProductBySupplier = async (req, res) => { // done
   const page = parseInt(req.query.page) || 1;
@@ -152,6 +154,85 @@ export const getProductByCategory = async (req, res) => { // done
     });
   }
 };
+export const getProductByCategorySubCategorySubSubCategory = async (req, res) => {
+  const type = req.query.type;
+  let query = {};
+  try {
+    if (req.query.search) {
+      query.title = new RegExp(req.query.search, 'i');
+    }
+    if (req.query.category) {
+      query.category = new mongoose.Types.ObjectId(req.query.category);
+    }
+    if (req.query.subCategory) {
+      query.subCategory = new mongoose.Types.ObjectId(req.query.subCategory);
+    }
+    if (req.query.subSubCategory) {
+      query.subSubCategory = new mongoose.Types.ObjectId(req.query.subSubCategory);
+    }
+
+    let products = [];
+    if (type === 'sale') {
+      // Select from PurchaseItem for sales
+      const pipelineAggregation = [
+        {
+          $lookup: {
+            from: "products",
+            let: { productId: "$product" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$_id", "$$productId"] } } },
+              { $match: query }
+            ],
+            as: "productInfo"
+          }
+        },
+        { $unwind: "$productInfo" },
+        { $match: { reminderQuantity: { $gt: 0 } } },
+        {
+          $group: {
+            _id: "$productInfo._id",
+            product: { $first: "$$ROOT" }
+          }
+        },
+        {
+          $replaceRoot: { newRoot: "$product" }
+        }
+      ];
+      products = await PurchaseItem.aggregate(pipelineAggregation).exec();
+    } else {
+      // Default to selecting from Product for purchases
+      const pipelineAggregation = [{ $match: query }];
+      products = await Product.aggregate(pipelineAggregation).exec();
+    }
+
+    if (!products || products.length === 0) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No products found"
+      });
+    }
+
+    const transformedProducts = await Promise.all(
+      products.map(async (product) => {
+        if (type === 'sale') {
+          return await transformationInventoryProduct(product); // Assuming transformationInventoryProduct is defined for transforming PurchaseItem
+        } else {
+          return await transformationProduct(product);
+        }
+      })
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: transformedProducts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+}
 export const getAllProductAssignedToSupplier = async (req, res) => { // done
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;

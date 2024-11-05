@@ -73,7 +73,7 @@ import {
 //   updateOrder,
 // } from '../controllers/orderController.js';
 // import { authenticate } from '../middlewares/authorizationMiddleware.js';
-import { deleteProductImage, getAllProduct, getProductByProductId, uploadProductImage } from '../controllers/productsController.js';
+import { deleteProductImage, getAllProduct, getProductByCategorySubCategorySubSubCategory, getProductByProductId, uploadProductImage } from '../controllers/productsController.js';
 // import {
 //   createCar,
 //   deleteCar, getCarByWeight,
@@ -177,6 +177,7 @@ const Router = express.Router();
 // Router.get('/customer/numberOfCustomer', getNumberOfCustomer)
 
 Router.get('/product', getAllProduct);
+Router.get('/product/all/category', getProductByCategorySubCategorySubSubCategory)
 Router.get('/product/:id', getProductByProductId);
 Router.post('/product', validateCreateProduct, createProduct); // uploadProducts.array('images'),
 Router.post('/product/uploadImage/:id', uploadProducts.single('image'), uploadProductImage);

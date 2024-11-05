@@ -195,7 +195,7 @@ export const getProductsByInventoryId = async (req, res) => {
       },
       { $match: { reminderQuantity: { $gt: 0 } } },
     ];
-    if (req.query.isPagination === true) {
+    if (req.query.isPagination === 'true') {
       pipelineAggregation.push(
         { $skip: (page - 1) * limit },
         { $limit: limit }
@@ -215,7 +215,7 @@ export const getProductsByInventoryId = async (req, res) => {
       )
     );
 
-    if (req.query.isPagination === true) {
+    if (req.query.isPagination === 'true') {
       res.status(200).json({
         status: "success",
         page: page,

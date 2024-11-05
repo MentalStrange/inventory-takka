@@ -38,11 +38,12 @@ const productSchema = mongoose.Schema({
   subCategory:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"SubCategory",
-    // required:[true, 'Product should be associated with a subCategory']
+    required:[true, 'Product should be associated with a subCategory']
   },
   subSubCategory:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"SubSubCategory",
+    required:[true, 'Product should be associated with a subSubCategory'],
     validate: {
       validator: async function(value) {
         if (!value) return true;
