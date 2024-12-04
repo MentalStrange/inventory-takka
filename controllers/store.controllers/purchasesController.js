@@ -6,6 +6,7 @@ import Purchase from '../../models/store.models/purchaseSchema.js';
 import SupplierInventory from '../../models/store.models/supplierInventorySchema.js';
 import Unit from '../../models/unitSchema.js';
 import mongoose from "mongoose";
+import {withdrawWishlist} from "../../services/WishlistService.js";
 export const getAllPurchases = async (req, res) => {
   let query = {};
   const page = parseInt(req.query.page) || 1;
@@ -164,6 +165,8 @@ export const createPurchase = async (req, res) => {
       { _id: purchaseData.customerSupplierInventory._id },
       { $inc: { credit: purchaseData.totalAmount, debit: purchaseData.paidAmount } }
     );
+
+    await withdrawWishlist(purchase._id);
 
     res.status(200).json({
       status: 'success',

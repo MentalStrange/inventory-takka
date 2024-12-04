@@ -12,7 +12,7 @@ import Order from "../models/orderSchema.js";
 import Fee from "../models/feesSchema.js";
 import SubCategory from "../models/subCategorySchema.js";
 import ReasonOfCancelOrReturn from "../models/reasonOfCancelOrReturnSchema.js";
-import { ProcessNames, egyptHour } from "../utils/balanceSheet.js";
+import {egyptHour, ProcessNames} from "../utils/balanceSheet.js";
 import Group from "../models/groupSchema.js";
 import ReturnPartOrder from "../models/returnPartOrderSchema.js";
 import DeliveryBoy from "../models/deliveryBoySchema.js";
@@ -74,8 +74,10 @@ export const transformationSubSubCategory = async (subSubCategory) => {
   };
 }
 export const transformationProduct = async (product) => {
+  let units = product.units;
+
   const transformedUnits = await Promise.all(
-    product.units.map(async (unitId) => {
+    units.map(async (unitId) => {
       const unit = await Unit.findById(unitId);
       return await transformationUnit(unit);
     })
@@ -108,7 +110,7 @@ export const transformationProduct = async (product) => {
     subCategory: subCategory ? await transformationSubCategory(subCategory, false) : null,
     subSubCategory: subSubCategory ? await transformationSubSubCategory(subSubCategory) : null,
     barcode: product.barcode ?? null,
-    images: (product.images && product.images.length > 0) 
+    images: (product.images && product.images.length > 0)
             ? product.images : [],
   };
 };
@@ -120,7 +122,7 @@ export const transformationSupplierProduct = async (supplierProduct, quantity = 
   const subSubCategory = await SubSubCategory.findOne({ _id: product.subSubCategory });
   const subUnit = await SubUnit.findById(supplierProduct.subUnit);
   const unit = supplierProduct.unit ? await Unit.findById(supplierProduct.unit): null;
-  
+
   return {
     _id: supplierProduct._id,
     productAdminId: product._id,
@@ -233,7 +235,7 @@ export const transformationOrder = async (order) => {
             maxNumber: product.unit.maxNumber,
           } : null,
           subUnit: { _id: product.subUnit.subUnitId, name: product.subUnit.name },
-        
+
           supplierType: product.supplierType,
           stock: product.stock,
           quantity: product.quantity,
@@ -292,7 +294,7 @@ export const transformationOrder = async (order) => {
                   maxNumber: product.unit.maxNumber,
                 } : null,
                 subUnit: { _id: product.subUnit.subUnitId, name: product.subUnit.name },
-         
+
                 supplierType: product.supplierType,
                 stock: product.stock,
                 quantity: product.quantity,
@@ -595,7 +597,7 @@ export const transformationGroup = async (group) => {
   const transformationOrderData = await Promise.all(
     orders.map(async (order) => await transformationOrder(order))
   );
-  
+
   return {
     _id: group._id,
     name: group.region,
@@ -833,7 +835,7 @@ export const transformationReturnPurchase = async (returnPurchase) => { // اظ�
 }
 
 export const transformationSale = async (sale) => {
-  
+
   const inventory = await Inventory.findById(sale.inventoryId);
   const customerInventory = await CustomerInventory.findById(sale.customerInventoryId);
   const saleItems = await SaleItem.find({ saleId: sale._id });
@@ -1003,4 +1005,35 @@ export const transformationTreasury = async (treasury) => {
     operationType: treasury.operationType,
     admin: await transformationPartAdmin(treasury.admin),
   }
+}
+
+//  ------------------ wishlist ---------------
+export const transformationWishlistItem = async (wishlistItem) => {
+  let product = wishlistItem.prodcut;
+  let unit = wishlistItem.unit;
+
+  if (!product)
+    product = await Product.findById(wishlistItem.productId);
+
+  if (!unit)
+    unit = await Unit.findById(wishlistItem.unitId);
+
+  return {
+    product: await transformationProduct(product),
+    unit: await transformationUnit(unit),
+    amount: wishlistItem.amount
+  }
+};
+
+export const transformationWishlist = async (wishlist, wishlistItems = []) => {
+  console.log(wishlist.date);
+
+  return {
+    _id: wishlist._id,
+    title: wishlist.title,
+    factoryName: wishlist.factoryName,
+    date: wishlist.date,
+    status: wishlist.status,
+    products: wishlistItems
+  };
 }

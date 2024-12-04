@@ -556,9 +556,9 @@ export const getTreasury = async (req, res) => {
     const totalCredits =
       totalPurchases +
       totalExpenses +
-      totalSuppliers +
+      -totalSuppliers +
       totalSubtractFromTreasury;
-    const totalDebits = totalSales + totalCustomers + totalAddToTreasury;
+    const totalDebits = totalSales + -totalCustomers + totalAddToTreasury;
     const totalBalance = totalDebits - totalCredits;
 
     res.status(200).json({

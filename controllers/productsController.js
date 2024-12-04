@@ -205,12 +205,12 @@ export const getProductByCategorySubCategorySubSubCategory = async (req, res) =>
       products = await Product.aggregate(pipelineAggregation).exec();
     }
 
-    if (!products || products.length === 0) {
-      return res.status(404).json({
-        status: "fail",
-        message: "No products found"
-      });
-    }
+    // if (!products || products.length === 0) {
+    //   return res.status(404).json({
+    //     status: "fail",
+    //     message: "No products found"
+    //   });
+    // }
 
     const transformedProducts = await Promise.all(
       products.map(async (product) => {
@@ -329,7 +329,7 @@ export const getAllProduct = async (req, res) => { // done
     if(req.query.pagination === "notExist"){
       products = await Product.find(query);
     } else {
-    products = await Product.aggregate(pipelineAggregation).exec();
+      products = await Product.aggregate(pipelineAggregation).exec();
     }
     const transformedProducts = await Promise.all(
       products.map(async (product) => await transformationProduct(product))

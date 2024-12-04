@@ -1,49 +1,34 @@
 import express from 'express';
 import multer from 'multer';
 import {
-  createAdmin,
-  // createHomeSlideShow,
-  // createReason,
-  // createRegion,
-  // createSubRegion,
-  createSubUnit,
-  createUnit,
-  deleteAdmin,
-  // deleteHomeSlideShow,
-  // deleteReason,
-  // deleteRegion,
-  // deleteSubRegion,
-  deleteSubUnit,
-  // deleteSupplier,
-  deleteUnit,
-  getAdminsByPeriodId,
-  getAllAdmins,
-  // getAllHomeSlideShow,
-  // getAllReasons,
-  // getAllRegion,
-  // getAllSubRegion,
-  getAllSubUnits,
-  getAllUnits,
-  // getSubRegionByRegionId,
-  updateAdmin,
-  // updateReason,
-  // updateRegion,
-  // updateSubRegion,
-  updateSubUnit,
-  updateUnit,
+	createAdmin,
+	createSubUnit,
+	createUnit,
+	deleteAdmin,
+	deleteSubUnit,
+	deleteUnit,
+	getAdminsByPeriodId,
+	getAllAdmins,
+	getAllSubUnits,
+	getAllUnits,
+	updateAdmin,
+	updateSubUnit,
+	updateUnit,
 } from '../controllers/adminController.js';
-import { createProduct, deleteProduct, storage, updateProduct } from '../controllers/sharedFunction.js';
+import {createProduct, deleteProduct, storage, updateProduct} from '../controllers/sharedFunction.js';
 import {
-  createCategory,
-  deleteCategory,
-  updateCategory,
-  getAllCategory,
-  // changeImageCategory,
-  createSubCategory, deleteSubCategory, getSubCategoryByCategory, updateSubCategory,
-  createSubSubCategory,
-  updateSubSubCategory,
-  deleteSubSubCategory,
-  getSubSubCategoryBySubCategory
+	createCategory,
+	createSubCategory,
+	createSubSubCategory,
+	deleteCategory,
+	deleteSubCategory,
+	deleteSubSubCategory,
+	getAllCategory,
+	getSubCategoryByCategory,
+	getSubSubCategoryBySubCategory,
+	updateCategory,
+	updateSubCategory,
+	updateSubSubCategory
 } from '../controllers/categoryController.js';
 // import { createCustomer, createSupplier } from '../auth/signup.js';
 // import {
@@ -73,7 +58,13 @@ import {
 //   updateOrder,
 // } from '../controllers/orderController.js';
 // import { authenticate } from '../middlewares/authorizationMiddleware.js';
-import { deleteProductImage, getAllProduct, getProductByCategorySubCategorySubSubCategory, getProductByProductId, uploadProductImage } from '../controllers/productsController.js';
+import {
+	deleteProductImage,
+	getAllProduct,
+	getProductByCategorySubCategorySubSubCategory,
+	getProductByProductId,
+	uploadProductImage
+} from '../controllers/productsController.js';
 // import {
 //   createCar,
 //   deleteCar, getCarByWeight,
@@ -87,79 +78,123 @@ import { deleteProductImage, getAllProduct, getProductByCategorySubCategorySubSu
 // import { getNumberOfCustomer } from '../controllers/customerController.js';
 // import { createExpireDayGroup, createFee, createFineForCancel, createFineForCompleteGroup, createFineForOnDelivery, createFineForPending, createFineForTrash, createInProgressFine, createNumberOfCompleteGroupDays, createNumberOfInProgressDays, createNumberOfOnDeliveryDays, createNumberOfPendingDays, deleteFineForCancel, deleteFineForOnDelivery, deleteFineForPending, deleteFineForTrash, deleteInProgressFine, getExpireDayGroup, getFee, getFineForCancel, getFineForCompleteGroup, getFineForOnDelivery, getFineForPending, getFineForTrash, getInProgressFine, getNumberOfCompleteGroupDays, getNumberOfInProgressDays, getNumberOfOnDeliveryDays, getNumberOfPendingDays } from '../controllers/fineController.js';
 import {
-  createInventory, createTreasuryOperation, deleteInventory,
-  getAllInventory, getEntries, getGlobalCreditAndDebit, getOneInventory,
-  getProductsByInventoryId,
-  getSettlement,
-  getTotalPurchasesAndSalesByAdmin,
-  getTreasury,
-  patchSettlement,
-  postSettlement,
-  transferProductBetweenInventories,
-  updateInventory
+	createInventory,
+	createTreasuryOperation,
+	deleteInventory,
+	getAllInventory,
+	getEntries,
+	getGlobalCreditAndDebit,
+	getOneInventory,
+	getProductsByInventoryId,
+	getSettlement,
+	getTotalPurchasesAndSalesByAdmin,
+	getTreasury,
+	patchSettlement,
+	postSettlement,
+	transferProductBetweenInventories,
+	updateInventory
 } from '../controllers/store.controllers/InventoryController.js';
 import {
-  createCustomerInventory,
-  createDetailedAccount,
-  createSupplierInventory, deleteCustomerInventory, deleteSupplierInventory,
-  getAllCustomerInventory,
-  getAllSupplierInventory,
-  getDetailedAccount,
-  getOneCustomerInventory,
-  getOneSupplierInventory,
-  sortedCustomerInventory,
-  sortedSupplierInventory,
-  totalCredit,
-  totalDebit,
-  updateCustomerInventory,
-  updateSupplierInventory
+	createCustomerInventory,
+	createDetailedAccount,
+	createSupplierInventory,
+	deleteCustomerInventory,
+	deleteSupplierInventory,
+	getAllCustomerInventory,
+	getAllSupplierInventory,
+	getDetailedAccount,
+	getOneCustomerInventory,
+	getOneSupplierInventory,
+	sortedCustomerInventory,
+	sortedSupplierInventory,
+	totalCredit,
+	totalDebit,
+	updateCustomerInventory,
+	updateSupplierInventory
 } from '../controllers/store.controllers/customerSupplierController.js';
-import { calcTotalAmountPurchase, createPurchase, deletePurchase, getAllPurchases, getPurchaseById, getReturnsByPurchaseId, getTotalReceiptsAndTaxesForPurchase, returnPurchase } from '../controllers/store.controllers/purchasesController.js';
-import { createSale, deleteSale, getAllSales, getProductReport, getReturnsBySaleId, getSaleById, getTotalReceiptsAndTaxesForSale, returnSale } from '../controllers/store.controllers/salesController.js';
-import { createExpense, createFixedExpense, deleteExpense, deleteFixedExpense, getAllFixedExpenses, getExpenseById, getExpenses, getFixedExpenseById, getTotalExpenses, updateExpense, updateFixedExpense } from '../controllers/store.controllers/expenseController.js';
-import { createPeriod, deletePeriod, getAllPeriods, updatePeriod } from '../controllers/store.controllers/periodController.js';
-import { createDefectiveItem, getDefectiveItems, getNearingExpiration, getProductItemsByProductId } from '../controllers/store.controllers/defectiveController.js';
+import {
+	calcTotalAmountPurchase,
+	createPurchase,
+	deletePurchase,
+	getAllPurchases,
+	getPurchaseById,
+	getReturnsByPurchaseId,
+	getTotalReceiptsAndTaxesForPurchase,
+	returnPurchase
+} from '../controllers/store.controllers/purchasesController.js';
+import {
+	createSale,
+	deleteSale,
+	getAllSales,
+	getProductReport,
+	getReturnsBySaleId,
+	getSaleById,
+	getTotalReceiptsAndTaxesForSale,
+	returnSale
+} from '../controllers/store.controllers/salesController.js';
+import {
+	createExpense,
+	createFixedExpense,
+	deleteExpense,
+	deleteFixedExpense,
+	getAllFixedExpenses,
+	getExpenseById,
+	getExpenses,
+	getFixedExpenseById,
+	getTotalExpenses,
+	updateExpense,
+	updateFixedExpense
+} from '../controllers/store.controllers/expenseController.js';
+import {
+	createPeriod,
+	deletePeriod,
+	getAllPeriods,
+	updatePeriod
+} from '../controllers/store.controllers/periodController.js';
+import {
+	createDefectiveItem,
+	getDefectiveItems,
+	getNearingExpiration,
+	getProductItemsByProductId
+} from '../controllers/store.controllers/defectiveController.js';
 // import { validatePhoneNumber } from '../middlewares/phoneNumberMiddleware.js';
-import { 
-  validateCreateAdmin, 
-  validateCreateCustomerInventory, 
-  validateCreateDetailedAccount, 
-  // validateCreateCar, 
-  validateCreateInventory, 
-  validateCreateProduct, 
-  validateCreatePurchase, 
-  // validateCreateReason, 
-  // validateCreateRegion, 
-  validateCreateSale, 
-  // validateCreateSubRegion, 
-  validateCreateSubUnit, 
-  validateCreateSupplierInventory, 
-  // validateCreateSupplier, 
-  validateCreateUnit, 
-  validatePatchSettlement, 
-  validatePostSettlement, 
-  validateReturnPurchase, 
-  validateReturnSale, 
-  validateUpdateAdmin, 
-  validateUpdateCustomerInventory, 
-  validateUpdateProduct, 
-  // validateUpdateCar, 
-  // validateUpdateReason, 
-  // validateUpdateRegion, 
-  // validateUpdateSubRegion, 
-  validateUpdateSubUnit, 
-  validateUpdateSupplierInventory, 
-  // validateUpdateSupplier, 
-  validateUpdateUnit 
+import {
+	validateCreateAdmin,
+	validateCreateCustomerInventory,
+	validateCreateDetailedAccount,
+	validateCreateInventory,
+	validateCreateProduct,
+	validateCreatePurchase,
+	validateCreateSale,
+	validateCreateSubUnit,
+	validateCreateSupplierInventory,
+	validateCreateUnit,
+	validatePatchSettlement,
+	validatePostSettlement,
+	validateReturnPurchase,
+	validateReturnSale,
+	validateUpdateAdmin,
+	validateUpdateCustomerInventory,
+	validateUpdateProduct,
+	validateUpdateSubUnit,
+	validateUpdateSupplierInventory,
+	validateUpdateUnit
 } from '../middlewares/validationMiddlewaresRequest.js';
-import { createPayment, deletePayment, getAllPayment, getPaymentById, updatePayment } from '../controllers/store.controllers/paymentController.js';
+import {
+	createPayment,
+	deletePayment,
+	getAllPayment,
+	getPaymentById,
+	updatePayment
+} from '../controllers/store.controllers/paymentController.js';
+import {createWishlist, deleteWishlist, getAllWishlist, updateWishlist} from "../controllers/wishlistController.js";
 // import { putSubSubCategoryInDB } from '../helper/calculateCompletionPercentage.js';
 // import { createAdvertisement, deleteAdvertisement, getAdvertisementById, getAllAdvertisements, updateAdvertisement } from '../controllers/advertisementController.js';
 
-const uploadCategory = multer({ storage: storage('category') });
+const uploadCategory = multer({storage: storage('category')});
 // const uploadSlideShow = multer({ storage: storage('slideshow') });
 // const uploadDeliveryBoy = multer({ storage: storage('deliveryboy') });
-const uploadProducts = multer({ storage: storage('product') });
+const uploadProducts = multer({storage: storage('product')});
 // const uploadCar = multer({ storage: storage('car') });
 
 const Router = express.Router();
@@ -309,10 +344,10 @@ Router.get('/customerInventory/:id', getOneCustomerInventory);
 Router.post('/customerInventory', validateCreateCustomerInventory, createCustomerInventory);
 Router.patch('/customerInventory/:id', validateUpdateCustomerInventory, updateCustomerInventory);
 Router.delete('/customerInventory/:id', deleteCustomerInventory);
-Router.get('/customerInventory-totalDebit', totalDebit); 
+Router.get('/customerInventory-totalDebit', totalDebit);
 Router.get('/sortedCustomerInventory', sortedCustomerInventory);
 
-Router.get('/purchases', getAllPurchases); 
+Router.get('/purchases', getAllPurchases);
 Router.get('/purchase/:id', getPurchaseById);
 Router.post('/purchase', validateCreatePurchase, createPurchase);
 Router.delete('/purchase/:id', deletePurchase);
@@ -320,7 +355,7 @@ Router.patch('/purchase/:id', validateReturnPurchase, returnPurchase); // مرت
 Router.get('/purchase-returns/:id', getReturnsByPurchaseId); // مرتجع
 Router.get('/purchase-calcTotalAmount', calcTotalAmountPurchase);
 
-Router.get('/sales', getAllSales); 
+Router.get('/sales', getAllSales);
 Router.get('/sale/:id', getSaleById);
 Router.post('/sale', validateCreateSale, createSale);
 Router.delete('/sale/:id', deleteSale);
@@ -388,18 +423,25 @@ Router.get('/totalExpenses', getTotalExpenses);
 // Router.delete('/advertisement/:id', deleteAdvertisement);
 
 //******************************** transfer between inventories ************************** */
-Router.post('/transfer',transferProductBetweenInventories)
+Router.post('/transfer', transferProductBetweenInventories)
 
 //******************************** CRUD operation for payment ************************** */
-Router.post('/payment',createPayment)
-Router.get('/payment',getAllPayment)
-Router.delete('/payment/:id',deletePayment)
-Router.patch('/payment/:id',updatePayment)
-Router.get('/payment/:id',getPaymentById)
+Router.post('/payment', createPayment)
+Router.get('/payment', getAllPayment)
+Router.delete('/payment/:id', deletePayment)
+Router.patch('/payment/:id', updatePayment)
+Router.get('/payment/:id', getPaymentById)
 
 //******************************** get total receipts and total taxes ************************** */
-Router.get('/total-purchases-receipts',getTotalReceiptsAndTaxesForPurchase) 
-Router.get('/total-sale-receipts',getTotalReceiptsAndTaxesForSale)
+Router.get('/total-purchases-receipts', getTotalReceiptsAndTaxesForPurchase)
+Router.get('/total-sale-receipts', getTotalReceiptsAndTaxesForSale)
 
 Router.get('/total-purchases-and-sales/:id', getTotalPurchasesAndSalesByAdmin);
+
+// ----------------------- wishlist ------------------
+Router.post('/wishlist', createWishlist);
+Router.get('/wishlists', getAllWishlist);
+Router.delete('/wishlist/:id', deleteWishlist);
+Router.patch('/wishlist/:id', updateWishlist);
+
 export default Router;
