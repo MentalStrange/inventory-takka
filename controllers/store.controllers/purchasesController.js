@@ -166,7 +166,7 @@ export const createPurchase = async (req, res) => {
       { $inc: { credit: purchaseData.totalAmount, debit: purchaseData.paidAmount } }
     );
 
-    await withdrawWishlist(purchase._id);
+    await withdrawWishlist(purchase._id, purchaseData.products);
 
     res.status(200).json({
       status: 'success',

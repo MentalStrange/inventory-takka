@@ -4,7 +4,9 @@ import {transformationWishlist, transformationWishlistItem} from "../format/tran
 import {ObjectId} from "mongodb";
 
 export const getAllWishlist = async (req, res) => {
-	let query = {};
+	const query = {};
+	let pagination = true;
+
 	const page = parseInt(req.query.page) || 1;
 	const limit = parseInt(req.query.limit) || 10;
 
@@ -14,6 +16,11 @@ export const getAllWishlist = async (req, res) => {
 
 	if (['new', 'in_progress', 'completed'].includes(req.query.status)) {
 		query.status = req.query.status;
+	}
+
+	if (req.query.notCompletedOnly) {
+		query.status = { $ne: 'completed' };
+		pagination = false;
 	}
 
 	let pipelineAggregation = [
@@ -69,8 +76,7 @@ export const getAllWishlist = async (req, res) => {
 			}
 		},
 		{$match: query},
-		{$skip: (page - 1) * limit},
-		{$limit: limit}
+		... (pagination ? [{$skip: (page - 1) * limit}, {$limit: limit}] : [])
 	];
 
 	const wishlists = await Wishlist.aggregate(pipelineAggregation).exec();
